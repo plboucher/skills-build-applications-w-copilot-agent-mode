@@ -8,15 +8,25 @@ function Users() {
 
   useEffect(() => {
     setLoading(true)
-    fetch(getApiUrl('users'))
+    const url = getApiUrl('users')
+    // show actual URL used for debugging
+    // eslint-disable-next-line no-console
+    console.info('[Users] fetching', url)
+    fetch(url)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Failed to load users: ${response.status}`)
+          throw new Error(`Failed to load users: ${response.status} ${response.statusText}`)
         }
         return response.json()
       })
       .then((data) => setItems(normalizeApiResponse(data)))
-      .catch((err) => setError(err.message))
+      .catch((err) => {
+        // capture full error for display
+        const msg = err?.message || String(err)
+        setError(msg)
+        // eslint-disable-next-line no-console
+        console.error('[Users] fetch error', err)
+      })
       .finally(() => setLoading(false))
   }, [])
 
@@ -28,7 +38,7 @@ function Users() {
             <div className="card-body">
               <h2 className="card-title mb-3">Users</h2>
               <p className="text-muted mb-4">
-                Fetching users from <code>/api/users/</code>.
+                Fetching users from <code>{getApiUrl('users')}</code>.
               </p>
               {!CODESPACE_NAME && (
                 <div className="alert alert-warning" role="alert">

@@ -7,6 +7,14 @@ export const API_BASE_URL = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev`
   : 'http://localhost:8000';
 
+// Debug: log resolved environment values at runtime
+try {
+  // eslint-disable-next-line no-console
+  console.info('[api] VITE_CODESPACE_NAME=', codespaceName, 'API_BASE_URL=', API_BASE_URL)
+} catch (e) {
+  // ignore logging errors in some environments
+}
+
 export function getApiUrl(resource) {
   return `${API_BASE_URL}/api/${resource}/`;
 }

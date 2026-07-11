@@ -6,6 +6,7 @@ import Leaderboard from './components/Leaderboard.jsx'
 import Teams from './components/Teams.jsx'
 import Users from './components/Users.jsx'
 import Workouts from './components/Workouts.jsx'
+import { CODESPACE_NAME } from './components/api.js'
 
 function Home() {
   return (
@@ -21,9 +22,11 @@ function Home() {
               <p className="text-muted">
                 Use the navigation to browse users, teams, activities, leaderboard, and workouts.
               </p>
-              <div className="alert alert-info mt-4">
-                <strong>Note:</strong> Define <code>VITE_CODESPACE_NAME</code> in <code>.env.local</code> for the GitHub Codespaces backend URL.
-              </div>
+              {!CODESPACE_NAME && (
+                <div className="alert alert-info mt-4">
+                  <strong>Note:</strong> Define <code>VITE_CODESPACE_NAME</code> in <code>.env.local</code> for the GitHub Codespaces backend URL.
+                </div>
+              )}
             </div>
           </div>
         </div>
