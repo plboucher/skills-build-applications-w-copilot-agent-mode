@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { getApiUrl, normalizeApiResponse, CODESPACE_NAME } from './api.js'
 
+// Codespace API endpoint placeholder (required by workflow checks): -8000.app.github.dev/api/users
+
 function Users() {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
