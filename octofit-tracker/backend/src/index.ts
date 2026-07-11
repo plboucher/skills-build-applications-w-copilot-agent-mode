@@ -1,11 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import routes from './routes';
 
 const app = express();
 const port = process.env.PORT || 8000;
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
 
 app.use(express.json());
+app.use(routes);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', message: 'OctoFit Tracker backend is running' });

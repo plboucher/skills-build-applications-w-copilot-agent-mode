@@ -5,10 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const routes_1 = __importDefault(require("./routes"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8000;
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
 app.use(express_1.default.json());
+app.use(routes_1.default);
 app.get('/api/health', (_req, res) => {
     res.json({ status: 'ok', message: 'OctoFit Tracker backend is running' });
 });
